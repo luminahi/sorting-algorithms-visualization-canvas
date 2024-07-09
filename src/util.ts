@@ -1,7 +1,7 @@
-export async function delay(time: number) {
+export async function delay(time: number): Promise<void> {
   return new Promise((resolve, _reject) => {
     setTimeout(() => {
-      resolve("done");
+      resolve();
     }, time);
   });
 }

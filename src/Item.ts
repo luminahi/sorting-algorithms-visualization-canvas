@@ -36,4 +36,8 @@ export class Item {
   public setValue(value: number) {
     this.height = value * -1;
   }
+
+  public setColor(color: string) {
+    this.color = color;
+  }
 }
