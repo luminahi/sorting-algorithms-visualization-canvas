@@ -10,7 +10,19 @@
   <body>
     <div class="container">
       <canvas width="0" height="0"></canvas>
+      <form id="sort-form">
+        <select id="sorting" name="sorting" required>
+          <option disabled selected>Choose a Algorithm:</option>
+          <option value="bubble">Bubble Sort</option>
+          <option value="selection">Selection Sort</option>
+          <option value="merge">Merge Sort</option>
+          <option value="heap">Heap Sort</option>
+        </select>
+        <input type="range" name="speed" min="1" max="10" />
+        <button type="submit">Sort</button>
+      </form>
     </div>
+
     <script type="module" src="build/main.js"></script>
   </body>
 </html>
