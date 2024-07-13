@@ -31,4 +31,35 @@ export async function bubbleSort(
   fn(array);
 }
 
-export async function selectionSort() {}
+export async function selectionSort(
+  array: Item[],
+  fn: Function,
+  animationSpeed: number
+) {
+  for (let i = 0; i < array.length - 1; i++) {
+    let minIndex = i;
+    array[i].setColor("blue");
+
+    for (let j = i + 1; j < array.length; j++) {
+      array[j].setColor("red");
+      let canContinue: boolean = fn(array);
+      await delay(animationSpeed / 10);
+      if (!canContinue) return;
+
+      if (array[j].getValue() < array[minIndex].getValue()) {
+        minIndex = j;
+      }
+
+      array[j].setColor("white");
+    }
+
+    let aux = array[i].getValue();
+    array[i].setValue(array[minIndex].getValue());
+    array[minIndex].setValue(aux);
+
+    array[i].setColor("white");
+    array[minIndex].setColor("white");
+  }
+
+  fn(array);
+}
