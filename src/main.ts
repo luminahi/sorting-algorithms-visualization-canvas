@@ -1,5 +1,5 @@
 import { ItemManager } from "./ItemManager.js";
-import { bubbleSort } from "./Sorting.js";
+import { bubbleSort, insertionSort, selectionSort } from "./Sorting.js";
 
 function getOptions(form: HTMLFormElement) {
   const formData = new FormData(form);
@@ -44,6 +44,10 @@ addEventListener("DOMContentLoaded", (e) => {
         manager.runAnimation(bubbleSort, speed);
         break;
       case "selection":
+        manager.runAnimation(selectionSort, speed);
+        break;
+      case "insertion":
+        manager.runAnimation(insertionSort, speed);
         break;
       case "merge":
         break;
