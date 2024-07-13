@@ -15,9 +15,7 @@ export async function bubbleSort(
   for (let i = 0; i < array.length; i++) {
     for (let j = i + 1; j < array.length; j++) {
       if (array[i].getValue() > array[j].getValue()) {
-        let aux = array[i].getValue();
-        array[i].setValue(array[j].getValue());
-        array[j].setValue(aux);
+        swap(array, i, j);
 
         await delay(animationSpeed);
 
@@ -49,7 +47,7 @@ export async function selectionSort(
     for (let j = i + 1; j < array.length; j++) {
       array[j].setColor("red");
       let canContinue: boolean = fn(array);
-      await delay(animationSpeed / 10);
+      await delay(animationSpeed);
       if (!canContinue) return;
 
       if (array[j].getValue() < array[minIndex].getValue()) {
@@ -59,9 +57,7 @@ export async function selectionSort(
       array[j].setColor("white");
     }
 
-    let aux = array[i].getValue();
-    array[i].setValue(array[minIndex].getValue());
-    array[minIndex].setValue(aux);
+    swap(array, i, minIndex);
 
     array[i].setColor("white");
     array[minIndex].setColor("white");
@@ -86,8 +82,10 @@ export async function insertionSort(
       j--;
 
       array[j].setColor("red");
-      fn(array);
+      let canContinue = fn(array);
       await delay(animationSpeed);
+      if (!canContinue) return;
+
       array[j].setColor("white");
     }
     array[i].setColor("white");
