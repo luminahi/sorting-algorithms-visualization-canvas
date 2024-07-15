@@ -11,16 +11,49 @@
     <div class="container">
       <canvas width="0" height="0"></canvas>
       <form id="sort-form">
-        <select id="sorting" name="sorting" required>
-          <option disabled selected>Choose a Algorithm:</option>
-          <option value="bubble">Bubble Sort</option>
-          <option value="selection">Selection Sort</option>
-          <option value="insertion">Insertion Sort</option>
-          <option value="merge">Merge Sort</option>
-          <option value="heap">Heap Sort</option>
-        </select>
-        <input type="range" name="speed" min="1" max="10" />
-        <button type="submit">Sort</button>
+        <div class="group">
+          <select id="sorting" name="sorting" required>
+            <option disabled selected>Choose a Algorithm:</option>
+            <option value="bubble">Bubble Sort</option>
+            <option value="selection">Selection Sort</option>
+            <option value="insertion">Insertion Sort</option>
+            <option value="merge">Merge Sort</option>
+            <option value="heap">Heap Sort</option>
+          </select>
+        </div>
+        <div class="group">
+          <label for="speed">
+            <h3>Animation Speed</h3>
+            <input id="speed" type="range" name="speed" min="1" max="32" />
+          </label>
+        </div>
+
+        <div class="group">
+          <label for="random">
+            <input
+              checked
+              id="random"
+              type="radio"
+              value="random"
+              name="mode"
+            />
+            Random
+          </label>
+
+          <label for="asc">
+            <input id="asc" type="radio" value="asc" name="mode" />
+            Sorted - Ascending
+          </label>
+
+          <label for="desc">
+            <input id="desc" type="radio" value="desc" name="mode" />
+            Sorted - Descending
+          </label>
+        </div>
+
+        <div class="group">
+          <button id="sort" type="submit">Sort</button>
+        </div>
       </form>
     </div>
 
