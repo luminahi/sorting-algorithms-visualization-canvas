@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "watch": "esbuild --watch src/* --outdir=build/"
+    "watch": "esbuild src/**/*.ts --watch --outdir=build/"
   },
   "keywords": [],
   "author": "",
