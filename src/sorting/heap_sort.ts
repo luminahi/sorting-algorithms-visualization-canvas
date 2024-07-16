@@ -83,9 +83,7 @@ class MinHeap {
   }
 
   public async sort(array: Item[], fn: Function, animationSpeed: number) {
-    const length = array.length;
-
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i < array.length; i++) {
       array[i].setValue(this.extractMin());
 
       array[i].setColor("red");
@@ -103,14 +101,21 @@ class MinHeap {
 async function heapSort(array: Item[], fn: Function, animationSpeed: number) {
   const heap = new MinHeap(array.length);
 
-  await new Promise(async (resolve, _reject) => {
+  array.forEach((item) => heap.insert(item.getValue()));
+
+  await new Promise<void>(async (resolve, _reject) => {
+    const heapArray = heap.getArray();
     for (let i = 0; i < array.length; i++) {
-      heap.insert(array[i].getValue());
+      array[i].setValue(heapArray[i]);
+
       array[i].setColor("blue");
       fn(array);
       await delay(animationSpeed);
+
+      array[i].setColor("white");
     }
-    resolve("");
+
+    resolve();
   });
 
   heap.sort(array, fn, animationSpeed);

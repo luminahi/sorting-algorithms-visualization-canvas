@@ -3,6 +3,7 @@ import { bubbleSort } from "./sorting/bubble_sort.js";
 import { selectionSort } from "./sorting/selection_sort.js";
 import { insertionSort } from "./sorting/insertion_sort.js";
 import { getOptions } from "./util.js";
+import { heapSort } from "./sorting/heap_sort.js";
 
 addEventListener("DOMContentLoaded", (e) => {
   const canvas = document.querySelector("canvas") as HTMLCanvasElement;
@@ -50,6 +51,7 @@ addEventListener("DOMContentLoaded", (e) => {
       case "merge":
         break;
       case "heap":
+        manager.runAnimation(heapSort, speed);
         break;
       default:
         manager.runAnimation(bubbleSort, speed);
