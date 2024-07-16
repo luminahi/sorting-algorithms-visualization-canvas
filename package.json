@@ -1,14 +1,16 @@
 {
   "name": "sorting-algorithms-visualization",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
-    "watch": "esbuild src/**/*.ts --watch --outdir=build/"
+    "watch": "esbuild src/**/*.ts --watch --outdir=build/",
+    "build": "esbuild src/**/*.ts --outdir=build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": [
+    "sorting"
+  ],
+  "author": "Alex Lima",
+  "license": "MIT",
+  "description": "visualization of sorting algorithms using html canvas",
   "devDependencies": {
     "esbuild": "^0.23.0"
   }
