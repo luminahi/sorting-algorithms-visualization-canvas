@@ -40,4 +40,8 @@ export class Item {
   public setColor(color: string) {
     this.color = color;
   }
+
+  public toString() {
+    return `X: ${this.x} Y: ${this.y} ::: Value: ${this.getValue()}`;
+  }
 }
