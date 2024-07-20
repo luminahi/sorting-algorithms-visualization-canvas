@@ -88,9 +88,12 @@ class MinHeap {
 
       array[i].setColor("red");
       fn(array);
+      let canContinue: boolean = fn(array);
       await delay(animationSpeed);
 
       array[i].setColor("white");
+
+      if (!canContinue) return;
     }
 
     fn(array);
@@ -109,10 +112,12 @@ async function heapSort(array: Item[], fn: Function, animationSpeed: number) {
       array[i].setValue(heapArray[i]);
 
       array[i].setColor("blue");
-      fn(array);
+      let canContinue: boolean = fn(array);
       await delay(animationSpeed);
 
       array[i].setColor("white");
+
+      if (!canContinue) return;
     }
 
     resolve();
