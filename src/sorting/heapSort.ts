@@ -1,6 +1,5 @@
-import { Item } from "../Item.js";
 import { ItemManager } from "../ItemManager.js";
-import { delay, swap } from "../util.js";
+import { delay } from "../util.js";
 
 class MinHeap {
   private array: number[];
