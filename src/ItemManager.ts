@@ -1,24 +1,27 @@
 import { Item } from "./Item.js";
 
 export class ItemManager {
-  public items: Item[];
+  private items: Item[];
   private screenWidth: number;
   private screenHeight: number;
   private arraySize: number;
   private ctx: CanvasRenderingContext2D;
   private isRunning: boolean;
+  private sortBtn: HTMLButtonElement;
 
   public constructor(
     screenWidth: number,
     screenHeight: number,
     arraySize: number,
-    ctx: CanvasRenderingContext2D
+    ctx: CanvasRenderingContext2D,
+    sortBtn: HTMLButtonElement
   ) {
     this.screenWidth = screenWidth;
     this.screenHeight = screenHeight;
     this.arraySize = arraySize;
     this.ctx = ctx;
     this.isRunning = false;
+    this.sortBtn = sortBtn;
   }
 
   public paintBackground() {
@@ -31,7 +34,7 @@ export class ItemManager {
     for (const item of this.items) item.draw();
   }
 
-  public generateItemsRandom() {
+  public async generateItemsRandom() {
     if (this.isRunning) this.stopAnimation();
 
     this.items = new Array(this.arraySize);
@@ -50,7 +53,7 @@ export class ItemManager {
     }
   }
 
-  public generateItemDescending() {
+  public generateItemsDescending() {
     if (this.isRunning) this.stopAnimation();
 
     this.items = new Array(this.arraySize);
@@ -71,7 +74,7 @@ export class ItemManager {
     }
   }
 
-  public generateItemAscending() {
+  public generateItemsAscending() {
     if (this.isRunning) this.stopAnimation();
 
     this.items = new Array(this.arraySize);
@@ -90,20 +93,18 @@ export class ItemManager {
     }
   }
 
+  public getItems() {
+    return this.items;
+  }
+
   public runAnimation(sortingAlgorithm: Function, animationSpeed: number) {
     this.isRunning = true;
-
-    sortingAlgorithm(
-      this.items,
-      () => {
-        this.paintItems();
-        return this.isRunning;
-      },
-      animationSpeed
-    );
+    this.sortBtn.innerHTML = "Stop";
+    sortingAlgorithm(this, animationSpeed);
   }
 
   public stopAnimation() {
+    this.sortBtn.innerHTML = "Start";
     this.isRunning = false;
   }
 

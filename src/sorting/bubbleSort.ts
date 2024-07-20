@@ -1,22 +1,20 @@
-import { Item } from "../Item.js";
+import { ItemManager } from "../ItemManager.js";
 import { delay, swap } from "../util.js";
 
-export async function bubbleSort(
-  array: Item[],
-  fn: Function,
-  animationSpeed: number
-) {
+async function bubbleSort(manager: ItemManager, animationSpeed: number) {
+  const array = manager.getItems();
+
   for (let i = 0; i < array.length; i++) {
     for (let j = i + 1; j < array.length; j++) {
       array[i].setColor("blue");
       array[j].setColor("red");
-      let canContinue: boolean = fn(array);
+
+      manager.paintItems();
       await delay(animationSpeed);
+      if (!manager.isAnimationRunning()) return;
 
       array[i].setColor("white");
       array[j].setColor("white");
-
-      if (!canContinue) return;
 
       if (array[i].getValue() > array[j].getValue()) {
         swap(array, i, j);
@@ -24,5 +22,8 @@ export async function bubbleSort(
     }
   }
 
-  fn(array);
+  manager.paintItems();
+  manager.stopAnimation();
 }
+
+export { bubbleSort };

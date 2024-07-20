@@ -1,4 +1,5 @@
 import { Item } from "../Item.js";
+import { ItemManager } from "../ItemManager.js";
 import { delay, swap } from "../util.js";
 
 class MinHeap {
@@ -82,26 +83,29 @@ class MinHeap {
     return this.array;
   }
 
-  public async sort(array: Item[], fn: Function, animationSpeed: number) {
+  public async sort(manager: ItemManager, animationSpeed: number) {
+    const array = manager.getItems();
+
     for (let i = 0; i < array.length; i++) {
       array[i].setValue(this.extractMin());
 
       array[i].setColor("red");
-      fn(array);
-      let canContinue: boolean = fn(array);
+
+      manager.paintItems();
       await delay(animationSpeed);
+      if (!manager.isAnimationRunning()) return;
 
       array[i].setColor("white");
-
-      if (!canContinue) return;
     }
 
-    fn(array);
-    return array;
+    manager.paintItems();
+    manager.stopAnimation();
   }
 }
 
-async function heapSort(array: Item[], fn: Function, animationSpeed: number) {
+async function heapSort(manager: ItemManager, animationSpeed: number) {
+  const array = manager.getItems();
+
   const heap = new MinHeap(array.length);
 
   array.forEach((item) => heap.insert(item.getValue()));
@@ -112,18 +116,18 @@ async function heapSort(array: Item[], fn: Function, animationSpeed: number) {
       array[i].setValue(heapArray[i]);
 
       array[i].setColor("blue");
-      let canContinue: boolean = fn(array);
+
+      manager.paintItems();
       await delay(animationSpeed);
+      if (!manager.isAnimationRunning()) return;
 
       array[i].setColor("white");
-
-      if (!canContinue) return;
     }
 
     resolve();
   });
 
-  heap.sort(array, fn, animationSpeed);
+  heap.sort(manager, animationSpeed);
 }
 
 export { heapSort };

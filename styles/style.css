@@ -49,7 +49,7 @@ input {
   margin-inline: 16px;
 }
 
-#sort {
+#sort-btn {
   width: 200px;
   height: 50px;
   font-family: "Courier New", Courier, monospace;

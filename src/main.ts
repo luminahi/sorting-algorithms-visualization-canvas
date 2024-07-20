@@ -1,24 +1,31 @@
 import { ItemManager } from "./ItemManager.js";
-import { bubbleSort } from "./sorting/bubble_sort.js";
-import { selectionSort } from "./sorting/selection_sort.js";
-import { insertionSort } from "./sorting/insertion_sort.js";
-import { getOptions } from "./util.js";
-import { heapSort } from "./sorting/heap_sort.js";
+import { bubbleSort } from "./sorting/bubbleSort.js";
+import { selectionSort } from "./sorting/selectionSort.js";
+import { insertionSort } from "./sorting/insertionSort.js";
+import { delay, getOptions } from "./util.js";
+import { heapSort } from "./sorting/heapSort.js";
 
 addEventListener("DOMContentLoaded", (e) => {
   const canvas = document.querySelector("canvas") as HTMLCanvasElement;
   const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
   const form = document.getElementById("sort-form") as HTMLFormElement;
+  const sortBtn = document.getElementById("sort-btn") as HTMLButtonElement;
 
   const width = (canvas.width = 900);
   const height = (canvas.height = 600);
 
-  let manager = new ItemManager(width, height, 60, ctx);
+  let manager = new ItemManager(width, height, 60, ctx, sortBtn);
   manager.paintBackground();
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    if (manager.isAnimationRunning()) {
+      manager.stopAnimation();
+      manager.paintBackground();
+      return;
+    }
 
     const { sorting, speed, mode } = getOptions(
       e.currentTarget as HTMLFormElement
@@ -29,10 +36,10 @@ addEventListener("DOMContentLoaded", (e) => {
         manager.generateItemsRandom();
         break;
       case "asc":
-        manager.generateItemAscending();
+        manager.generateItemsAscending();
         break;
       case "desc":
-        manager.generateItemDescending();
+        manager.generateItemsDescending();
         break;
       default:
         manager.generateItemsRandom();
@@ -49,6 +56,7 @@ addEventListener("DOMContentLoaded", (e) => {
         manager.runAnimation(insertionSort, speed);
         break;
       case "merge":
+        // manager.runAnimation(mergeSort, speed);
         break;
       case "heap":
         manager.runAnimation(heapSort, speed);
