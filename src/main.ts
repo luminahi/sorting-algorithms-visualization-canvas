@@ -2,8 +2,9 @@ import { ItemManager } from "./ItemManager.js";
 import { bubbleSort } from "./sorting/bubbleSort.js";
 import { selectionSort } from "./sorting/selectionSort.js";
 import { insertionSort } from "./sorting/insertionSort.js";
-import { delay, getOptions } from "./util.js";
+import { getOptions } from "./util.js";
 import { heapSort } from "./sorting/heapSort.js";
+import { mergeSort } from "./sorting/mergeSort.js";
 
 addEventListener("DOMContentLoaded", (e) => {
   const canvas = document.querySelector("canvas") as HTMLCanvasElement;
@@ -56,7 +57,7 @@ addEventListener("DOMContentLoaded", (e) => {
         manager.runAnimation(insertionSort, speed);
         break;
       case "merge":
-        // manager.runAnimation(mergeSort, speed);
+        manager.runAnimation(mergeSort, speed);
         break;
       case "heap":
         manager.runAnimation(heapSort, speed);
