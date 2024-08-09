@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "watch": "esbuild src/main.ts --bundle --watch --outfile=build/main.js",
-    "build": "esbuild src/main.ts --bundle --minify --outfile=build/main.js"
+    "build": "esbuild src/main.ts --bundle --minify --outfile=build/main.js",
+    "start": "esbuild --serve --servedir=."
   },
   "keywords": [
     "sorting"
