@@ -10,7 +10,11 @@
 
 - Clone the repository
    ```bash
-   https://github.com/luminahi/sorting-algorithms-visualization-canvas.git
+   git clone https://github.com/luminahi/sorting-algorithms-visualization-canvas.git
+   ```
+- Move to project folder
+   ```bash
+   cd sorting-algorithms-visualization-canvas
    ```
 - Install dependencies
    ```bash
